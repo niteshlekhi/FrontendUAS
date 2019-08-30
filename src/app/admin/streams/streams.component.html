@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Streams</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <app-adminheader></app-adminheader>
+    <div class="container">
+        <h2>Streams</h2>
+        <hr>
+        <div class="form-group">
+            <!-- Hidden field -->
+            <label id="sid" style="display: none;"></label>
+            <label for="stream">Stream Name: </label>
+            <input type="text" class="form-control" #sname id="sname" placeholder="Enter stream" name="stream">
+        </div>
+        <button type="submit" class="btn btn-default" id="btnAdd" (click)="AddorUpdateStream(sname)">ADD</button>
+        <hr>
+
+        <h2>Streams List</h2>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>SNo.</th>
+                    <th>Stream Name</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let stream of streams; index as i">
+                    <td>{{i}}</td>
+                    <td>{{stream.sname}}</td>
+                    <td class="ml-2" style="margin-left:2px">
+                        <!-- <span class="btn-group"> -->
+                            <button class="btn btn-outline btn-primary mr-5"
+                                (click)="GetUpdateStream(stream.sid)">Edit</button>
+                            <button class="btn btn-outline btn-danger ml-5 "
+                                (click)="DeleteStream(stream.sid)">Delete</button>
+                        <!-- </span> -->
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+
+
+</body>
+
+</html>

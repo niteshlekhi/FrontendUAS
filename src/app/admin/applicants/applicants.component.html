@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Streams</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+  <app-adminheader></app-adminheader>
+
+  <!-- Container -->
+
+  <div class="container">
+    <h2>Applicant Details</h2>
+    <hr>
+
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Applicant Name</th>
+          <th>Email</th>
+          <th>Contact</th>
+          <th>Address</th>
+          <th>Gender</th>
+          <th>DOB</th>
+          <th>Stream</th>
+          <th>Department</th>
+          <th>Course</th>
+          <th>Status</th>
+          <th class="ml-2">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let applicant of applicants;index as i">
+          <td>{{applicant.appname}}</td>
+          <td>{{applicant.appemail}}</td>
+          <td>{{applicant.appcontact}}</td>
+          <td>{{applicant.appaddress}}</td>
+          <td>{{applicant.appgender}}</td>
+          <td>{{applicant.appDOB}}</td>
+          <td>{{applicant.sname}}</td>
+          <td>{{applicant.dname}}</td>
+          <td>{{applicant.cname}}</td>
+          <td *ngIf="applicant.asts==0" style="background:orange;color:white">Pending</td>
+          <td *ngIf="applicant.asts==1" style="background:lightgreen;color:white">Approved</td>
+          <td *ngIf="applicant.asts==-1" style="background:red;color:white">Rejected</td>
+          <td class="ml-2" style="background:lightgray;margin-left:2px"><span class="btn-group">
+              <button class="btn btn-outline btn-primary ">Full Details</button>
+              <button *ngIf="applicant.asts!==1" class="btn btn-outline btn-success" (click)="UpdateStatus(applicant.aid,1)">Approve</button>
+              <button class="btn btn-outline btn-danger" (click)="UpdateStatus(applicant.aid,-1)">Reject</button>
+            </span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+
+
+</body>
+
+</html>
