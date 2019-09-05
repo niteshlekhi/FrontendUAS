@@ -8,8 +8,6 @@
 </head>
 
 <body>
-    <app-adminheader></app-adminheader>
-
     <!-- Container -->
 
     <div class="container">
@@ -17,43 +15,44 @@
         <hr>
         <div class="form-group">
             <label for="Department">Department</label>
-            <select class="form-control">
-                <option>Select Department</option>
+            <select #dept class="form-control">
+                <option *ngFor="let dept of depts" [value]="dept.did">
+                    {{dept.dname}}
+                </option>
             </select>
         </div>
 
 
         <div class="form-group">
             <label for="department">Course Name:</label>
-            <input type="text" class="form-control" id="Course" placeholder="Enter Course" name="Course">
+            <input type="text" class="form-control" #cname id="cname" placeholder="Enter Course" name="Course">
         </div>
-        <button type="submit" class="btn btn-default">Add</button>
+        <button type="submit" id="btnAdd" class="btn btn-default" (click)="AddorUpdateCourse(cname,dept)">ADD</button>
         <hr>
 
 
-        <table class="table table-hover">
+        <table datatable class="table table-hover">
             <thead>
                 <tr>
-                    <th>Firstname</th>
-                    <th>Lastname</th>
-                    <th>Email</th>
+                    <th>SNo.</th>
+                    <th>Department Name</th>
+                    <th>Stream Name</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>John</td>
-                    <td>Doe</td>
-                    <td>john@example.com</td>
-                </tr>
-                <tr>
-                    <td>Mary</td>
-                    <td>Moe</td>
-                    <td>mary@example.com</td>
-                </tr>
-                <tr>
-                    <td>July</td>
-                    <td>Dooley</td>
-                    <td>july@example.com</td>
+                <tr *ngFor="let course of courses;index as i">
+                    <td>{{i+1}}
+                    <td>{{course.cname}}</td>
+                    <td>{{course.dname}}</td>
+                    <td>
+                        <!-- <span class="btn-group"> -->
+                        <button class="btn btn-outline btn-primary mr-5"
+                            (click)="GetUpdateCourse(course.cid)">Edit</button>
+                        <button class="btn btn-outline btn-danger ml-5 "
+                            (click)="DeleteCourse(course.cid)">Delete</button>
+                        <!-- </span> -->
+                    </td>
                 </tr>
             </tbody>
         </table>

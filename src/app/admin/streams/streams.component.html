@@ -8,7 +8,7 @@
 </head>
 
 <body>
-    <app-adminheader></app-adminheader>
+    <!-- <app-adminheader></app-adminheader> -->
     <div class="container">
         <h2>Streams</h2>
         <hr>
@@ -22,7 +22,7 @@
         <hr>
 
         <h2>Streams List</h2>
-        <table class="table table-hover">
+        <table datatable class="table table-hover">
             <thead>
                 <tr>
                     <th>SNo.</th>
@@ -32,7 +32,7 @@
             </thead>
             <tbody>
                 <tr *ngFor="let stream of streams; index as i">
-                    <td>{{i}}</td>
+                    <td>{{i+1}}</td>
                     <td>{{stream.sname}}</td>
                     <td class="ml-2" style="margin-left:2px">
                         <!-- <span class="btn-group"> -->

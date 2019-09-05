@@ -8,7 +8,7 @@
 </head>
 
 <body>
-  <app-adminheader></app-adminheader>
+  <!-- <app-adminheader></app-adminheader> -->
 
   <!-- Container -->
 
@@ -16,45 +16,185 @@
     <h2>Applicant Details</h2>
     <hr>
 
-    <table class="table table-hover">
+    <table datatable class="table table-hover">
       <thead>
         <tr>
+          <th>SNo.</th>
           <th>Applicant Name</th>
           <th>Email</th>
           <th>Contact</th>
           <th>Address</th>
           <th>Gender</th>
-          <th>DOB</th>
           <th>Stream</th>
           <th>Department</th>
           <th>Course</th>
           <th>Status</th>
-          <th class="ml-2">Action</th>
+          <th class="ml-1">Action</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let applicant of applicants;index as i">
-          <td>{{applicant.appname}}</td>
-          <td>{{applicant.appemail}}</td>
-          <td>{{applicant.appcontact}}</td>
-          <td>{{applicant.appaddress}}</td>
-          <td>{{applicant.appgender}}</td>
-          <td>{{applicant.appDOB}}</td>
-          <td>{{applicant.sname}}</td>
-          <td>{{applicant.dname}}</td>
-          <td>{{applicant.cname}}</td>
+          <td (click)="modalpop(applicant.appid)">{{i+1}}</td>
+          <td (click)="modalpop(applicant.appid)">{{applicant.appname}}</td>
+          <td (click)="modalpop(applicant.appid)">{{applicant.appemail}}</td>
+          <td (click)="modalpop(applicant.appid)">{{applicant.appcontact}}</td>
+          <td (click)="modalpop(applicant.appid)">{{applicant.appaddress}}</td>
+          <td (click)="modalpop(applicant.appid)">{{applicant.appgender}}</td>
+          <td (click)="modalpop(applicant.appid)">{{applicant.sname}}</td>
+          <td (click)="modalpop(applicant.appid)">{{applicant.dname}}</td>
+          <td (click)="modalpop(applicant.appid)">{{applicant.cname}}</td>
           <td *ngIf="applicant.asts==0" style="background:orange;color:white">Pending</td>
           <td *ngIf="applicant.asts==1" style="background:lightgreen;color:white">Approved</td>
           <td *ngIf="applicant.asts==-1" style="background:red;color:white">Rejected</td>
-          <td class="ml-2" style="background:lightgray;margin-left:2px"><span class="btn-group">
-              <button class="btn btn-outline btn-primary ">Full Details</button>
-              <button *ngIf="applicant.asts!==1" class="btn btn-outline btn-success" (click)="UpdateStatus(applicant.aid,1)">Approve</button>
-              <button class="btn btn-outline btn-danger" (click)="UpdateStatus(applicant.aid,-1)">Reject</button>
+          <td class="ml-1" style="background:lightgray"><span class="btn-group">
+              <button *ngIf="applicant.asts!==1" class="btn btn-outline btn-success"
+                (click)="UpdateStatus(applicant.aid,1)">Approve</button>
+              <button *ngIf="applicant.asts!=-1" class="btn btn-outline btn-danger"
+                (click)="UpdateStatus(applicant.aid,-1)">Reject</button>
             </span></td>
         </tr>
       </tbody>
     </table>
   </div>
+
+
+
+  <!-- Modal popup to show full details of specific applicant -->
+  <div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="close" (click)="closemodal()">&times;</span>
+        <h2>Student Full Details</h2>
+      </div>
+      <div class="modal-body" *ngFor="let detail of fullDetails">
+        <!-- <center> -->
+        <h2 style="text-align: center">Personal Details</h2>
+
+        <table class="table table-hover">
+
+          <tbody>
+            <tr>
+              <td></td>
+              <td>Name</td>
+              <td>{{detail.appname}}</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>Email</td>
+              <td>{{detail.appemail}}</td>
+
+            </tr>
+            <tr>
+              <td></td>
+              <td>Contact</td>
+              <td>{{detail.appcontact}}</td>
+            </tr>
+
+            <tr>
+              <td></td>
+              <td>Father Name</td>
+              <td>{{detail.appfname}}</td>
+            </tr>
+
+            <tr>
+              <td></td>
+              <td>Father Contact</td>
+              <td>{{detail.appfcontact}}</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>Address</td>
+              <td>{{detail.appaddress}}</td>
+            </tr>
+
+            <tr>
+              <td></td>
+              <td>Gender</td>
+              <td>{{detail.appgender}}</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>Date of Birth</td>
+              <td>{{detail.appDOB}}</td>
+            </tr>
+
+          </tbody>
+        </table>
+        <h2 style="text-align: center">Education Details</h2>
+
+        <table class="table table-hover">
+
+          <tbody>
+            <tr>
+              <td></td>
+              <td>Year of Passing (10th)</td>
+              <td>{{detail.yop_10}}</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>Board (10th)</td>
+              <td>{{detail.board_10}}</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>Marks</td>
+              <td>{{detail.percent_10}}</td>
+            </tr>
+
+            <tr>
+              <td></td>
+              <td>Year of Passing (12th)</td>
+              <td>{{detail.yop_12}}</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>Board (12th)</td>
+              <td>{{detail.board_12}}</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>Marks</td>
+              <td>{{detail.percent_12}}</td>
+            </tr>
+
+            <tr>
+              <td></td>
+              <td>Year of Passing Graduation</td>
+              <td>{{detail.yop_grad}}</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>University</td>
+              <td>{{detail.univ_grad}}</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>Marks</td>
+              <td>{{detail.percent_grad}}</td>
+            </tr>
+
+
+
+          </tbody>
+        </table>
+        <!-- </center> -->
+
+      </div>
+      <div class="modal-footer">
+        <!-- <p>Welcome to the admin panel</p> -->
+      </div>
+    </div>
+
+  </div>
+
+
+
+
+
+
+
 
 
 

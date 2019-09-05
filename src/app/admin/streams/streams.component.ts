@@ -20,7 +20,7 @@ export class StreamsComponent implements OnInit {
   }
 
   AddorUpdateStream(input: HTMLInputElement) {
-    if (document.getElementById("btnAdd").innerHTML == 'ADD')
+    if (document.getElementById('btnAdd').innerHTML == 'ADD')
       this.AddStream(input.value);
     else
       this.UpdateStream(input.value);
@@ -28,9 +28,9 @@ export class StreamsComponent implements OnInit {
 
   // Method to ADD a Stream
   AddStream(name) {
-    let stream: any = {
+    const stream: any = {
       sname: name
-    }
+    };
     this.http.post<any>('http://localhost:19929/api/Stream/Add', stream).subscribe(data => {
       this.streams = data;
       console.log(data);
@@ -40,24 +40,27 @@ export class StreamsComponent implements OnInit {
 
   // Method to Update particular Stream
   GetUpdateStream(Id) {
-    document.getElementById("btnAdd").innerHTML = 'UPDATE';
+    document.getElementById('btnAdd').innerHTML = 'UPDATE';
     this.http.get<any>('http://localhost:19929/api/Stream/Get/' + Id).subscribe(data => {
-      document.getElementById("sname").setAttribute("value", data[0].sname);
-      document.getElementById("sid").innerHTML = Id;
+      document.getElementById('sname').setAttribute('value', data[0].sname);
+      document.getElementById('sid').innerHTML = Id;
       console.log(data);
     });
   }
 
   UpdateStream(name) {
-    var Id = document.getElementById("sid").innerHTML;
-    let stream: any = {
+    const Id = document.getElementById('sid').innerHTML;
+    // Stream object
+    const stream: any = {
       sid: Id,
       sname: name
-    }
-    document.getElementById("btnAdd").innerHTML = 'ADD';
+    };
+
+    document.getElementById('btnAdd').innerHTML = 'ADD';
+    // Adding Stream
     this.http.post<any>('http://localhost:19929/api/Stream/Update', stream).subscribe(data => {
-      document.getElementById("sname").setAttribute("value", '  ');
-      // document.getElementById("sname").setAttribute("placeholder", 'Enter stream');
+      document.getElementById('sname').setAttribute('value', '  ');
+      // document.getElementById('sname').setAttribute('placeholder', 'Enter stream');
       console.log(data);
       this.GetStreams();
     });
@@ -77,6 +80,7 @@ export class StreamsComponent implements OnInit {
 
 
   ngOnInit() {
+    // Display all Streams on page load
     this.GetStreams();
   }
 

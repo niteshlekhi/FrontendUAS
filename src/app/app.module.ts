@@ -1,10 +1,12 @@
+import { HomeComponent } from './admin/home/home.component';
+import { DataTablesModule } from 'angular-datatables';
 import { DepartmentsComponent } from './admin/departments/departments.component';
 import { AdminheaderComponent } from './admin/adminheader/adminheader.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
-import { MainComponent } from './main/main.component';
-import {HttpClientModule} from '@angular/common/http';
+import { RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 import { CoursesComponent } from './admin/courses/courses.component';
 import { ApplicantsComponent } from './admin/applicants/applicants.component';
 import { StreamsComponent } from './admin/streams/streams.component';
@@ -13,11 +15,12 @@ import { ApplicantheaderComponent } from './applicant/applicantheader/applicanth
 import { ProfileComponent } from './applicant/profile/profile.component';
 import { ApplyComponent } from './applicant/apply/apply.component';
 import { AppliedComponent } from './applicant/applied/applied.component';
+import { AdminComponent } from './admin/admin.component';
+import { ApplicantComponent } from './applicant/applicant.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MainComponent,
     AdminheaderComponent,
     CoursesComponent,
     ApplicantsComponent,
@@ -27,11 +30,27 @@ import { AppliedComponent } from './applicant/applied/applied.component';
     ApplicantheaderComponent,
     ProfileComponent,
     ApplyComponent,
-    AppliedComponent
+    AppliedComponent,
+    AdminComponent,
+    ApplicantComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    DataTablesModule,
+    RouterModule.forRoot([
+      { path: 'applicant', component: ApplicantComponent },
+      {
+        path: 'admin', component: AdminComponent, children: [
+          { path: 'home', component: HomeComponent },
+          { path: 'applicants', component: ApplicantsComponent },
+          { path: 'streams', component: StreamsComponent },
+          { path: 'departments', component: DepartmentsComponent },
+          { path: 'courses', component: CoursesComponent }
+        ],
+      }
+    ])
   ],
   providers: [],
   bootstrap: [AppComponent]
