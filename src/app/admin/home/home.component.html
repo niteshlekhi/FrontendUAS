@@ -1,1 +1,48 @@
-<p>home works!</p>
+<div class="jumbotron">
+    <div class="row w-100">
+        <div class="col-md-3">
+            <div class="card border-info mx-sm-1 p-3">
+
+                <div class="text-info text-center mt-3">
+                    <h4>Total Applicants</h4>
+                </div>
+                <div class="text-info text-center mt-2">
+                    <h1>{{list.TotalApplicants}}</h1>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-success mx-sm-1 p-3">
+
+                <div class="text-success text-center mt-3">
+                    <h4>Applications Accepted</h4>
+                </div>
+                <div class="text-success text-center mt-2">
+                    <h1>{{list.TotalApproved}}</h1>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-danger mx-sm-1 p-3">
+
+                <div class="text-danger text-center mt-3">
+                    <h4>Applications Rejected</h4>
+                </div>
+                <div class="text-danger text-center mt-2">
+                    <h1>{{list.TotalRejected}}</h1>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-warning mx-sm-1 p-3">
+
+                <div class="text-warning text-center mt-3">
+                    <h4>Applications Pending</h4>
+                </div>
+                <div class="text-warning text-center mt-2">
+                    <h1>{{list.TotalPending}}</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

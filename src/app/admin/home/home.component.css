@@ -1,0 +1,8 @@
+/* @import "http:////maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"; */
+.my-card
+{
+    position:absolute;
+    left:40%;
+    top:-20px;
+    border-radius:50%;
+}

@@ -8,11 +8,21 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AppliedComponent implements OnInit {
 
-  constructor() { }
 
+  appliedList = [];
+  constructor(private http: HttpClient) { }
+
+  // Method to GET list of all Applicants
+  GetApplicants(id) {
+    id = 7;
+    this.http.get<any>('http://localhost:19929/api/Applicant/GetAppliedApplications/' + id).subscribe(data => {
+      this.appliedList = data;
+      console.log(data);
+    });
+  }
 
   ngOnInit() {
-
+    this.GetApplicants(7);
   }
 
 }

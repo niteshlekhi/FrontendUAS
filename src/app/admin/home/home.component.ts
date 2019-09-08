@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +7,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
-  constructor() { }
+  list: {
+    TotalApplicants: '',
+    TotalApproved: '',
+    TotalRejected: '',
+    TotalPending: ''
+  };
+  constructor(private http: HttpClient) { }
 
   ngOnInit() {
+    this.http.get<any>('http://localhost:19929/api/Admin/GetDashboard').subscribe(data => {
+      this.list = data;
+    })
   }
 
 }

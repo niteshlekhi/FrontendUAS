@@ -9,6 +9,8 @@
 
 <body>
     <!-- <app-adminheader></app-adminheader> -->
+
+    <form #Stream="ngForm" >
     <div class="container">
         <h2>Streams</h2>
         <hr>
@@ -16,10 +18,15 @@
             <!-- Hidden field -->
             <label id="sid" style="display: none;"></label>
             <label for="stream">Stream Name: </label>
-            <input type="text" class="form-control" #sname id="sname" placeholder="Enter stream" name="stream">
+            <input type="text"  class="form-control" required #sname="ngModel" ngModel id="sname"
+            [class.MyError]="sname.invalid && sname.touched" placeholder="Enter stream" name="stream">
+            <small [class.MyDNone]="sname.valid || sname.untouched" class="text-danger">Please enter valid Stream</small>
         </div>
-        <button type="submit" class="btn btn-default" id="btnAdd" (click)="AddorUpdateStream(sname)">ADD</button>
+        <button type="submit" class="btn btn-default" id="btnAdd"
+        [disabled]="sname.invalid || sname.invalid" (click)="AddorUpdateStream(sname)">ADD</button>
         <hr>
+
+   
 
         <h2>Streams List</h2>
         <table datatable class="table table-hover">
@@ -47,7 +54,7 @@
         </table>
     </div>
 
-
+</form>
 
 
 </body>

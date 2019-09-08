@@ -1,17 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <title>Profile</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  </head>
+</head>
+
 <body>
-<app-applicantheader></app-applicantheader>
-  
-<div class="container">
-  <h3>Profile</h3>
-  
-</div>
+
+  <div class="container">
+
+    <h2 style="text-align:center">Personal Information</h2>
+    <hr>
+
+    <table class="table">
+
+      <tbody>
+        <tr>
+          <td class="wdth"></td>
+          <td>Name</td>
+          <td>Narayan</td>
+        </tr>
+        <tr>
+          <td class="wdth"></td>
+          <td>Email</td>
+          <td>Narayan@capgemini.com</td>
+        </tr>
+        <tr>
+          <td class="wdth"></td>
+          <td>Contact</td>
+          <td>+91869907897</td>
+        </tr>
+        <tr>
+          <td class="wdth"></td>
+          <td>Address</td>
+          <td>Chandigarh, Punjab </td>
+        </tr>
+        <tr>
+          <td class="wdth"></td>
+          <td>Father Name</td>
+          <td>Papa</td>
+        </tr>
+        <tr>
+          <td class="wdth"></td>
+          <td>Father Contact</td>
+          <td>+91989989980</td>
+        </tr>
+
+        <tr>
+          <td class="wdth"></td>
+          <td>Date Of Birth</td>
+          <td>21/10/1997</td>
+        </tr>
+        <tr>
+          <td class="wdth"></td>
+          <td>Gender</td>
+          <td>M</td>
+        </tr>
+
+      </tbody>
+    </table>
+    <hr>
+    <h2 style="text-align:center">Educational Information</h2>
+    <h4 style="text-align:center">10TH DETAILS</h4>
+    <hr>
+    <form #EduDet="ngForm" ngModel (submit)="Register(EduDet.value)">
+      {{ EduDet.value | json}}
+
+      <div class="form-group">
+        <label for="email">10TH Year of passing</label>
+        <input type="text" class="form-control" name="yop_10" required pattern="^\d{4}$" #yop_10="ngModel" ngModel
+          [class.MyError]="yop_10.invalid && yop_10.touched" placeholder="Year Of Passing">
+        <small [class.MyDNone]="yop_10.valid || yop_10.untouched" class="text-danger">Please enter valid Year</small>
+      </div>
+      <div class="form-group">
+        <label for="email">10TH Board</label>
+        <input type="text" class="form-control" name="board_10" required #board_10="ngModel" ngModel
+          [disabled]="yop_10.invalid" [class.MyError]="board_10.invalid && board_10.touched"
+          placeholder="Please specify your board of 10th">
+        <small [class.MyDNone]="board_10.valid || board_10.untouched" class="text-danger">Please enter a board</small>
+      </div>
+      <div class="form-group">
+        <label for="email">10TH Percentage</label>
+        <input type="text" class="form-control" required pattern="^(\d{1,2}|100])$" name="percent_10"
+          #percent_10="ngModel" [disabled]="yop_10.invalid || board_10.invalid" ngModel
+          [class.MyError]="percent_10.invalid && percent_10.touched"
+          placeholder="Please specify your Percentage in 10th">
+        <small [class.MyDNone]="percent_10.valid || percent_10.untouched" class="text-danger">Please enter a Percentage
+          ranging from 0 to 99</small>
+      </div>
+      <hr>
+      <h4 style="text-align:center">12TH / Diploma DETAILS</h4>
+      <hr>
+      <div>
+        <div class="form-group">
+          <label for="email">12TH Year of passing</label>
+          <input type="text" class="form-control" name="yop_12" #yop_12="ngModel" ngModel required
+            pattern="^(\s*|\d{4})$" [class.MyError]="yop_12.invalid && yop_12.touched"
+            [disabled]="yop_10.invalid || board_10.invalid || percent_10.invalid" placeholder="Year Of Passing of 12th">
+          <small [class.MyDNone]="yop_12.valid || yop_12.untouched" class="text-danger">Please enter valid Year</small>
+        </div>
+        <div class="form-group">
+          <label for="email">12TH Board</label>
+          <input type="text" class="form-control" name="board_12" #board_12="ngModel" required ngModel
+            [class.MyError]="board_12.invalid && board_12.touched"
+            [disabled]="yop_10.invalid || board_10.invalid || percent_10.invalid || yop_12.invalid"
+            placeholder="Please specify your board of 12th">
+          <small [class.MyDNone]="board_12.valid || board_12.untouched" class="text-danger">Please enter a board</small>
+        </div>
+        <div class="form-group">
+          <label for="email">12TH Percentage</label>
+          <input type="text" class="form-control" required pattern="^(\d{1,2}|100])$" name="percent_12"
+            #percent_12="ngModel" ngModel [class.MyError]="percent_12.invalid && percent_12.touched"
+            [disabled]="yop_10.invalid || board_10.invalid || percent_10.invalid || yop_12.invalid || board_12.invalid"
+            placeholder="Please specify your Percentage in 12th">
+          <small [class.MyDNone]="percent_12.valid || percent_12.untouched" class="text-danger">Please enter a
+            Percentage ranging from 0 to 99</small>
+        </div>
+      </div>
+      <hr>
+      <h4 style="text-align:center">GRADUATION DETAILS</h4>
+      <hr>
+      <div class="form-group">
+        <label for="email">Graduation Year of passing</label>
+        <input type="text" class="form-control" pattern="^\d{4}$" name="yop_grad" #yop_grad="ngModel" required ngModel
+          [class.MyError]="yop_grad.invalid && yop_grad.touched"
+          [disabled]="yop_10.invalid || board_10.invalid || percent_10.invalid || yop_12.invalid || board_12.invalid || percent_12.invalid"
+          placeholder="Year Of Passing of Graduation">
+        <small [class.MyDNone]="yop_grad.valid || yop_grad.untouched" class="text-danger">Please enter valid
+          Year</small>
+      </div>
+      <div class="form-group">
+        <label for="email">Graduation Board</label>
+        <input type="text" class="form-control" required name="grad_univ" #grad_univ="ngModel" ngModel
+          [class.MyError]="grad_univ.invalid && grad_univ.touched"
+          [disabled]="yop_10.invalid || board_10.invalid || percent_10.invalid || yop_12.invalid || board_12.invalid || percent_12.invalid || yop_grad.invalid"
+          placeholder="Please specify your University of Graduation">
+        <small [class.MyDNone]="grad_univ.valid || grad_univ.untouched" class="text-danger">Please enter a board</small>
+      </div>
+      <div class="form-group">
+        <label for="email">Graduation Percentage</label>
+        <input type="text" class="form-control" required pattern="^(\d{1,2}|100])$" name="percent_grad"
+          #percent_grad="ngModel" ngModel [class.MyError]="percent_grad.invalid && percent_grad.touched"
+          [disabled]="yop_10.invalid || board_10.invalid || percent_10.invalid || yop_12.invalid || board_12.invalid || percent_12.invalid || yop_grad.invalid || grad_univ.invalid"
+          placeholder="Please specify your Percentage in Graduation">
+        <small [class.MyDNone]="percent_grad.valid || percent_grad.untouched" class="text-danger">Please enter a
+          Percentage ranging from 0 to 99</small>
+      </div>
+
+      <input type="submit" class="btn btn-success" value="Update changes"
+        [disabled]="yop_10.invalid || board_10.invalid || percent_10.invalid  || board_12.invalid || percent_12.invalid ||  grad_univ.invalid || percent_grad.invalid" />
+    </form>
+    <hr>
+  </div>
+
 
 </body>
+
 </html>

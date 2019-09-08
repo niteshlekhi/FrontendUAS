@@ -17,6 +17,9 @@ import { ApplyComponent } from './applicant/apply/apply.component';
 import { AppliedComponent } from './applicant/applied/applied.component';
 import { AdminComponent } from './admin/admin.component';
 import { ApplicantComponent } from './applicant/applicant.component';
+import { MainComponent } from './main/main.component';
+import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -33,14 +36,24 @@ import { ApplicantComponent } from './applicant/applicant.component';
     AppliedComponent,
     AdminComponent,
     ApplicantComponent,
-    HomeComponent
+    HomeComponent,
+    MainComponent,
+    PagenotfoundComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     DataTablesModule,
+    FormsModule,
     RouterModule.forRoot([
-      { path: 'applicant', component: ApplicantComponent },
+      { path: '', component: MainComponent },
+      {
+        path: 'applicant', component: ApplicantComponent, children: [
+          { path: 'profile', component: ProfileComponent },
+          {path:'applied',component:AppliedComponent},
+          {path:'apply',component:ApplyComponent}
+        ]
+      },
       {
         path: 'admin', component: AdminComponent, children: [
           { path: 'home', component: HomeComponent },
@@ -49,7 +62,8 @@ import { ApplicantComponent } from './applicant/applicant.component';
           { path: 'departments', component: DepartmentsComponent },
           { path: 'courses', component: CoursesComponent }
         ],
-      }
+      },
+      { path: '**', component: PagenotfoundComponent }
     ])
   ],
   providers: [],

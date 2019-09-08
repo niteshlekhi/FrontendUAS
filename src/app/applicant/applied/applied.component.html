@@ -1,49 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <title>Profile</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  </head>
-<body>
-<app-applicantheader></app-applicantheader>
-  
+</head>
 
-<div class="container">
-        <h2>Applied Applications</h2><hr>
-                 
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th>Firstname</th>
-              <th>Lastname</th>
-              <th>Email</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>John</td>
-              <td>Doe</td>
-              <td>john@example.com</td>
-            </tr>
-            <tr>
-              <td>Mary</td>
-              <td>Moe</td>
-              <td>mary@example.com</td>
-            </tr>
-            <tr>
-              <td>July</td>
-              <td>Dooley</td>
-              <td>july@example.com</td>
-            </tr>
-            <tr>
-              <td>{{applicant['appfname']}}</td>
-              <td>{{applicant['appname']}}</td>
-              <td>{{applicant['appfcontact']}}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+<body>
+
+  <div class="container">
+    <h2>Applicant Details</h2>
+    <hr>
+
+    <table datatable class="table table-hover">
+      <thead>
+        <tr>
+          <th>SNo.</th>
+          <th>Applicant Name</th>
+          <th>Email</th>
+          <th>Contact</th>
+          <th>Address</th>
+          <th>Gender</th>
+          <th>Stream</th>
+          <th>Department</th>
+          <th>Course</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of appliedList;index as i">
+          <td>{{i+1}}</td>
+          <td>{{item.appname}}</td>
+          <td>{{item.appemail}}</td>
+          <td>{{item.appcontact}}</td>
+          <td>{{item.appaddress}}</td>
+          <td>{{item.appgender}}</td>
+          <td>{{item.sname}}</td>
+          <td>{{item.dname}}</td>
+          <td>{{item.cname}}</td>
+          <td *ngIf="item.asts==0" style="background:orange;color:white">Pending</td>
+          <td *ngIf="item.asts==1" style="background:lightgreen;color:white">Approved</td>
+          <td *ngIf="item.asts==-1" style="background:red;color:white">Rejected</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
 </body>
+
 </html>
