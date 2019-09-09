@@ -26,6 +26,7 @@
           <th>Department</th>
           <th>Course</th>
           <th>Status</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
@@ -42,6 +43,7 @@
           <td *ngIf="item.asts==0" style="background:orange;color:white">Pending</td>
           <td *ngIf="item.asts==1" style="background:lightgreen;color:white">Approved</td>
           <td *ngIf="item.asts==-1" style="background:red;color:white">Rejected</td>
+<td *ngIf="item.asts==1"><button class="btn btn-default" style="background:deepskyblue;color:white">Pay Fees</button></td>
         </tr>
       </tbody>
     </table>

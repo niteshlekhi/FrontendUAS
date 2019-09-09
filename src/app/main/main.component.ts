@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule, NgForm, NgModel } from '@angular/forms';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-main',
@@ -9,11 +10,11 @@ import { FormsModule, NgForm, NgModel } from '@angular/forms';
 })
 export class MainComponent implements OnInit {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   // Chat API Code
   TawkInit() {
-    let Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+    var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
     (function () {
       var s1 = document.createElement('script'), s0 = document.getElementsByTagName('script')[0];
       s1.async = true;
@@ -48,7 +49,7 @@ export class MainComponent implements OnInit {
     modalObj.style.display = 'none';
   }
 
-  // Form submit event to Register Applicant
+  // Method to Register Applicant on Form submit
   RegisterApplicant(register: NgForm) {
     const registerObj = register.value;
     const applicant = {
@@ -67,29 +68,42 @@ export class MainComponent implements OnInit {
 
       this.close_Loader('cover-spin');
       document.getElementById('msg').style.display = 'block';
-
-      // Reset form after Registration
+      // Hide status message after 3 seconds.
+      setTimeout(() => {
+        document.getElementById('msg').style.display = 'none';
+      }, 3000);
+      // Reset form after Registration.
+      this.gender = 'M';
       register.reset();
     });
   }
 
-  // Method to perform Applicant Login on button click
+  // Method to perform Applicant Login on button click.
   Login(credentials: NgForm) {
     this.disp_Loader('cover-spin');
     this.http.post<any>('http://localhost:19929/api/Applicant/Login', credentials.value).subscribe(data => {
       console.log(data);
-      // Storing Applicant ID in local session storage
-      sessionStorage.appid = parseInt(data);
       this.close_Loader('cover-spin');
-      document.getElementById('LoginMsg').style.display = 'block';
-      // Set Delay of 3 seconds
-      setTimeout(() => { alert('gsg')}, 3000);
-      // Redirect to account
+      if (parseInt(data) == -1) {
+        document.getElementById('LoginErrorMsg').style.display = 'block';
+        setTimeout(() => {
+          document.getElementById('LoginErrorMsg').style.display = 'none';
+        }, 3000);
 
+      }
+      else {
+        // Storing Applicant ID in local session storage
+        sessionStorage.appid = parseInt(data);
+        document.getElementById('LoginMsg').style.display = 'block';
+        // Set Delay of 3 seconds and then Redirect to Applicant homepage.
+        setTimeout(() => { document.getElementById('LoginMsg').style.display = 'none'; this.router.navigateByUrl('/applicant/profile'); }, 3000);
 
+      }
 
       // Reset form after Registration
       credentials.reset();
+
+
     });
   }
 

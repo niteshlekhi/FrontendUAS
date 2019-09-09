@@ -9,54 +9,56 @@
 
 <body>
 
+
+
   <div class="container">
 
     <h2 style="text-align:center">Personal Information</h2>
     <hr>
 
-    <table class="table">
+    <table class="table" *ngFor="let item of profile">
 
       <tbody>
         <tr>
           <td class="wdth"></td>
           <td>Name</td>
-          <td>Narayan</td>
+          <td>{{item.appname}}</td>
         </tr>
         <tr>
           <td class="wdth"></td>
           <td>Email</td>
-          <td>Narayan@capgemini.com</td>
+          <td>{{item.appemail}}</td>
         </tr>
         <tr>
           <td class="wdth"></td>
           <td>Contact</td>
-          <td>+91869907897</td>
+          <td>{{item.appcontact}}</td>
         </tr>
         <tr>
           <td class="wdth"></td>
           <td>Address</td>
-          <td>Chandigarh, Punjab </td>
+          <td>{{item.appaddress}}</td>
         </tr>
         <tr>
           <td class="wdth"></td>
           <td>Father Name</td>
-          <td>Papa</td>
+          <td>{{item.appfname}}</td>
         </tr>
         <tr>
           <td class="wdth"></td>
           <td>Father Contact</td>
-          <td>+91989989980</td>
+          <td>{{item.appfcontact}}</td>
         </tr>
 
         <tr>
           <td class="wdth"></td>
           <td>Date Of Birth</td>
-          <td>21/10/1997</td>
+          <td>{{item.appDOB | date:'dd/MM/yyyy'}}</td>
         </tr>
         <tr>
           <td class="wdth"></td>
           <td>Gender</td>
-          <td>M</td>
+          <td>{{item.appgender}}</td>
         </tr>
 
       </tbody>
@@ -65,7 +67,7 @@
     <h2 style="text-align:center">Educational Information</h2>
     <h4 style="text-align:center">10TH DETAILS</h4>
     <hr>
-    <form #EduDet="ngForm" ngModel (submit)="Register(EduDet.value)">
+    <form #EduDet="ngForm" (submit)="Register(EduDet.value)">
       {{ EduDet.value | json}}
 
       <div class="form-group">
